@@ -1,5 +1,6 @@
 import express from "express";
 import path from "path";
+import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 import colors from "colors";
 import { errorHandler } from "./middlewares/errorHandler.js";
@@ -19,6 +20,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/api/clientes", clienteRoutes);
 
 // iniciar frontend
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 if (process.env.NODE_ENV === "production") {
 	app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
